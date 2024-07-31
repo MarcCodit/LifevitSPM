@@ -10,6 +10,7 @@ import Foundation
 import LSBluetoothPlugin
 
 public protocol TranstekDelegate {
+    func onDeviceInfo(deviceInfo: LSDeviceInfo)
     func onStatusChanged(state: LSConnectState, description: String)
     func onDataReceived(data: LSBloodPressure)
 }
@@ -36,10 +37,10 @@ public class TranstekManager: NSObject {
                          LSDeviceType.bloodPressureMeter.rawValue,
                          LSDeviceType.thermometer.rawValue]
         
-        LSBluetoothManager.default()?.searchDevice(deviceTypes, results: { (device) in
-            let item : ScanResults? = ScanResults(device: device)
-            print(item.debugDescription)
+        LSBluetoothManager.default()?.searchDevice(deviceTypes, results: { [weak self] (device) in
+            guard let self = self else { return }
             
+            let item = ScanResults(device: device)
             if let name = item?.name, self.devicesAllowed.contains(name) {
                 //add target device
                 let macAddress = item!.macAddress ?? ""
@@ -48,7 +49,7 @@ public class TranstekManager: NSObject {
                 device.broadcastId = macAddress.replacingOccurrences(of: ":", with: "")
                 device.deviceType = LSDeviceType(rawValue: UInt(item!.deviceType))!
                 device.delayDisconnect = true
-                
+                self.delegate?.onDeviceInfo(deviceInfo: device)
                 
                 LSBluetoothManager.default().stopSearch()
                 LSBluetoothManager.default()?.addDevice(device)
