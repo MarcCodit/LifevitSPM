@@ -14,10 +14,14 @@ public protocol TranstekDelegate {
     func onDataReceived(data: LSBloodPressure)
 }
 
-public class TranstekManager {
+public class TranstekManager: NSObject {
     
     private let devicesAllowed = ["TMB-2284-B", "TMB-2296-BT"]
     public var delegate: TranstekDelegate?
+    
+    public init(delegate: TranstekDelegate? = nil) {
+        self.delegate = delegate
+    }
     
     public func scanAndConnect() {
         //scan filter with device type
@@ -44,13 +48,10 @@ public class TranstekManager {
             }
         })
     }
-    
 }
 
 extension TranstekManager: LSDeviceDataDelegate {
-    func bleDevice(_ device: LSDeviceInfo!, didConnectStateChanged state: LSConnectState) {
-        
-        
+    func bleDevice(_ device: LSDeviceInfo!, didConnectStateChanged state: LSConnectState) {        
         switch state {
         case .unknown:
             print("")
