@@ -23,7 +23,6 @@ public class TranstekManager: NSObject {
         self.delegate = delegate
     }
     
-    public init () {}
     
     public func scanAndConnect() {
         //scan filter with device type
@@ -53,7 +52,7 @@ public class TranstekManager: NSObject {
 }
 
 extension TranstekManager: LSDeviceDataDelegate {
-    func bleDevice(_ device: LSDeviceInfo!, didConnectStateChanged state: LSConnectState) {
+    public func bleDevice(_ device: LSDeviceInfo!, didConnectStateChanged state: LSConnectState) {
         switch state {
         case .unknown:
             print("")
@@ -94,7 +93,7 @@ extension TranstekManager: LSDeviceDataDelegate {
     }
     
     
-    func bleDevice(_ device: LSDeviceInfo!, didDataUpdateForBloodPressureMonitor data: LSBloodPressure!) {
+    public func bleDevice(_ device: LSDeviceInfo!, didDataUpdateForBloodPressureMonitor data: LSBloodPressure!) {
         delegate?.onDataReceived(data: data)
         
         DispatchQueue.main.async {
