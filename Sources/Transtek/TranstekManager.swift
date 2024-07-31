@@ -14,7 +14,7 @@ public protocol TranstekDelegate {
     func onDataReceived(data: LSBloodPressure)
 }
 
-public class TranstekManager: UIViewController {
+public class TranstekManager {
     
     private let devicesAllowed = ["TMB-2284-B", "TMB-2296-BT"]
     public var delegate: TranstekDelegate?
