@@ -32,6 +32,7 @@ public class TranstekManager: NSObject {
         
         LSBluetoothManager.default()?.searchDevice(deviceTypes, results: { (device) in
             let item : ScanResults? = ScanResults(device: device)
+            print(item.debugDescription)
             
             if let name = item?.name, self.devicesAllowed.contains(name) {
                 //add target device
