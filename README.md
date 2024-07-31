@@ -67,7 +67,10 @@ var transtekDevice: LSDeviceInfo? // If you want to save device info
 2- You can call this methods to connect and retrieve data:
 
 ```
+// Main func to connect and receive data:
 transtekManager.scanConnectAndRetrieveData()
+
+// More options to connect and receive data
 transtekManager.connectAndRetrieveData(withMacAddress: "B8:B7:7D:0E:63:16") // <- Change this fake mac
 transtekManager.connectAndRetrieveData(for: transtekDevice)
 ```
@@ -82,11 +85,11 @@ extension MyViewController: TranstekDelegate {
        transtekDevice = deviceInfo
     }
     
-    func onStatusChanged(state: LSConnectState, description: String) {
+	func onStatusChanged(state: LSConnectState, description: String) {
         // Callback with live connection state
     }
     
-    func onDataReceived(data: LSBloodPressure) {
+	func onDataReceived(data: LSBloodPressure) {
         // Callback with Data received
     }
 }
