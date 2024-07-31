@@ -69,7 +69,7 @@ public class TranstekManager: NSObject {
     }
     
     
-    public func connectAndRetrieveData(with macAddress: String) {
+    public func connectAndRetrieveData(withMacAddress macAddress: String) {
         let device = LSDeviceInfo()
         device.macAddress = macAddress
         device.broadcastId = macAddress.replacingOccurrences(of: ":", with: "")
