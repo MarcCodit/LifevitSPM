@@ -1,0 +1,6 @@
+framework module LifevitSDK {
+  umbrella header "LifevitSDK.h"
+
+  export *
+  module * { export * }
+}
