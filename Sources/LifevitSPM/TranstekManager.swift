@@ -23,6 +23,12 @@ public class TranstekManager: NSObject {
         self.delegate = delegate
     }
     
+    public override init() {
+        // log version
+        let versionName : String?=LSBluetoothManager.default()?.versionName; print("version name:\(versionName ?? "default Name")");
+        //init
+        LSBluetoothManager.default()?.initManager(withDispatch: DispatchQueue.init(label: "bluetoothQueue"))
+    }
     
     public func scanAndConnect() {
         //scan filter with device type

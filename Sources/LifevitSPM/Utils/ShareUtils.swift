@@ -63,7 +63,6 @@ struct ShareUtils {
         let filePath=Bundle.main.resourcePath!;
         var fileItems = [FileItem]();
         do {
-            let fileName = model.replacingOccurrences(of: "R", with: "B");
             let dirContents = try? FileManager.default.contentsOfDirectory(atPath: filePath) as NSArray;
             //根据设备型号过滤文件
             var files = (dirContents?.filtered(using: NSPredicate(format: "SELF CONTAINS %@", "lzo")))! as NSArray;
