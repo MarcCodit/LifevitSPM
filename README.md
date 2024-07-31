@@ -23,7 +23,7 @@ Search for the LifevitSDK using the repo's URL:
 https://github.com/lifevit/LifevitSPM.git
 ```
 
-Next, set the **Dependency Rule** to be `Up to Next Major Version`.
+Next, set the **Dependency Rule** to be `branch` `main`.
 
 Then, select **Add Package**.
 
