@@ -31,7 +31,7 @@ public class TranstekManager: NSObject {
         LSBluetoothManager.default()?.initManager(withDispatch: DispatchQueue.init(label: "bluetoothQueue"))
     }
     
-    public func scanAndConnect() {
+    public func scanConnectAndRetrieveData() {
         //scan filter with device type
         let deviceTypes=[LSDeviceType.bloodGlucoseMeter.rawValue,
                          LSDeviceType.bloodPressureMeter.rawValue,
@@ -49,13 +49,38 @@ public class TranstekManager: NSObject {
                 device.broadcastId = macAddress.replacingOccurrences(of: ":", with: "")
                 device.deviceType = LSDeviceType(rawValue: UInt(item!.deviceType))!
                 device.delayDisconnect = true
-                self.delegate?.onDeviceInfo(deviceInfo: device)
                 
+                self.delegate?.onDeviceInfo(deviceInfo: device)
                 LSBluetoothManager.default().stopSearch()
                 LSBluetoothManager.default()?.addDevice(device)
                 LSBluetoothManager.default()?.startDeviceSync(self)
             }
         })
+    }
+    
+    
+    public func connectAndRetrieveData(for device: LSDeviceInfo) {
+        self.delegate?.onDeviceInfo(deviceInfo: device)
+        
+        LSBluetoothManager.default().stopSearch()
+        LSBluetoothManager.default()?.setDevices([])
+        LSBluetoothManager.default()?.addDevice(device)
+        LSBluetoothManager.default()?.startDeviceSync(self)
+    }
+    
+    
+    public func connectAndRetrieveData(with macAddress: String) {
+        let device = LSDeviceInfo()
+        device.macAddress = macAddress
+        device.broadcastId = macAddress.replacingOccurrences(of: ":", with: "")
+        device.deviceType = .bloodPressureMeter
+        device.delayDisconnect = true
+        
+        self.delegate?.onDeviceInfo(deviceInfo: device)
+        LSBluetoothManager.default().stopSearch()
+        LSBluetoothManager.default()?.setDevices([])
+        LSBluetoothManager.default()?.addDevice(device)
+        LSBluetoothManager.default()?.startDeviceSync(self)
     }
 }
 
