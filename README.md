@@ -80,16 +80,16 @@ transtekManager.connectAndRetrieveData(for: transtekDevice)
 
 ```
 extension MyViewController: TranstekDelegate {
-	func onDeviceInfo(deviceInfo: LSDeviceInfo) {
-       // Callback with connected device info 
-       transtekDevice = deviceInfo
+    func onDeviceInfo(deviceInfo: LSDeviceInfo) {
+        // Callback with connected device info
+        transtekDevice = deviceInfo
     }
     
-	func onStatusChanged(state: LSConnectState, description: String) {
+    func onStatusChanged(state: LSConnectState, description: String) {
         // Callback with live connection state
     }
     
-	func onDataReceived(data: LSBloodPressure) {
+    func onDataReceived(data: LSBloodPressure) {
         // Callback with Data received
     }
 }
