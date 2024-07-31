@@ -23,6 +23,8 @@ public class TranstekManager: NSObject {
         self.delegate = delegate
     }
     
+    public init () {}
+    
     public func scanAndConnect() {
         //scan filter with device type
         let deviceTypes=[LSDeviceType.bloodGlucoseMeter.rawValue,
@@ -51,7 +53,7 @@ public class TranstekManager: NSObject {
 }
 
 extension TranstekManager: LSDeviceDataDelegate {
-    func bleDevice(_ device: LSDeviceInfo!, didConnectStateChanged state: LSConnectState) {        
+    func bleDevice(_ device: LSDeviceInfo!, didConnectStateChanged state: LSConnectState) {
         switch state {
         case .unknown:
             print("")
