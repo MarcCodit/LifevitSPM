@@ -1,6 +1,0 @@
-framework module Pods_LifevitSDKSample {
-  umbrella header "Pods-LifevitSDKSample-umbrella.h"
-
-  export *
-  module * { export * }
-}
